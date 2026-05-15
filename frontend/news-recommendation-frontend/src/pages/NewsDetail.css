@@ -1,0 +1,182 @@
+/* 全局容器 - 深色主题+基础布局，图片和页面同宽基于此容器 */
+.news-detail-container {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 0 20px;
+  font-family: "Microsoft YaHei", sans-serif;
+  color: #e2e8f0; /* 深色主题默认文字色 */
+  background-color: #1a202c; /* 你的深色主题色，可自行调整 */
+  padding: 20px;
+  border-radius: 8px;
+}
+
+/* 加载状态 - 深色主题适配 */
+.news-detail-loading {
+  text-align: center;
+  padding: 80px 0;
+}
+.loading-img {
+  width: 60px;
+  height: 60px;
+}
+.news-detail-loading p {
+  margin-top: 16px;
+  color: #a0aec0; /* 浅色提示文字 */
+}
+
+/* 错误状态 - 深色主题适配 */
+.news-detail-error {
+  text-align: center;
+  padding: 80px 0;
+  color: #fc8181; /* 浅色错误文字 */
+}
+.back-btn {
+  margin-top: 20px;
+  padding: 8px 20px;
+  background: #4299e1;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+.back-btn:hover {
+  background: #3182ce;
+}
+
+/* 新闻头部 - 白色标题+深色主题分类标签 */
+.news-header {
+  margin-bottom: 16px;
+}
+.news-category {
+  display: inline-block;
+  padding: 4px 10px;
+  background: #2d3748;
+  color: #90cdf4;
+  font-size: 12px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+.news-title {
+  font-size: 28px;
+  font-weight: bold;
+  line-height: 1.4;
+  margin: 0;
+  color: #ffffff; /* 白色标题 */
+}
+
+/* 新闻元信息 - 深色主题适配 */
+.news-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 14px;
+  color: #a0aec0;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #2d3748;
+}
+
+/* 新闻摘要 - 深色主题适配 */
+.news-abstract {
+  background: #2d3748;
+  padding: 12px 16px;
+  border-left: 4px solid #4299e1;
+  margin-bottom: 24px;
+  border-radius: 0 4px 4px 0;
+}
+.abstract-label {
+  font-weight: bold;
+  color: #ffffff;
+  margin-right: 8px;
+}
+.abstract-content {
+  color: #e2e8f0;
+  line-height: 1.6;
+}
+
+/* 图片区域 - 核心修改：图片宽度和页面容器完全一致 */
+.news-image-area {
+  margin-bottom: 24px;
+}
+/* 单图样式 - 和页面同宽，去掉高度限制，自适应 */
+.single-image-wrapper {
+  text-align: center;
+  width: 100%; /* 撑满容器 */
+}
+.news-cover-image {
+  max-width: 100% !important; /* 强制和页面同宽 */
+  width: 100%; /* 撑满容器 */
+  height: auto; /* 自适应高度，不变形 */
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+/* 多图样式 - 网格铺满页面容器，自适应列数 */
+.multi-image-wrapper {
+  margin-top: 8px;
+  width: 100%; /* 撑满容器 */
+}
+.multi-image-title {
+  font-size: 14px;
+  color: #a0aec0;
+  margin-bottom: 12px;
+}
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); /* 自适应列数，铺满容器 */
+  gap: 12px;
+  width: 100%; /* 撑满容器 */
+}
+.news-grid-image {
+  width: 100%;
+  height: 80px; /* 适度调整高度，保证美观 */
+  object-fit: cover;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.news-grid-image:hover {
+  transform: scale(1.02);
+}
+
+/* 新闻正文 - 深色主题适配 */
+.news-content {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #e2e8f0;
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #2d3748;
+}
+
+/* 交互组件容器 - 核心修改：浏览/点赞/收藏 一行横向显示 */
+.news-interaction-wrapper {
+  margin-top: 20px;
+  width: 100%;
+}
+/* 关键：给交互组件的子元素加横向flex布局（适配NewsInteraction内部结构） */
+.news-interaction {
+  display: flex;
+  align-items: center;
+  gap: 30px; /* 各项之间的间距，可自行调整 */
+  font-size: 16px;
+  padding: 10px 0;
+}
+/* 交互项子样式 - 图标+文字垂直居中，深色主题适配 */
+.news-interaction > div {
+  display: flex;
+  align-items: center;
+  gap: 6px; /* 图标和文字的间距 */
+  cursor: pointer;
+  color: #e2e8f0; 
+  transition: color 0.2s;
+}
+/* hover高亮效果，适配深色主题 */
+.news-interaction > div:hover {
+  color: #4299e1;
+}
+
+.news-interaction > div.active {
+  color: #4299e1;
+  font-weight: 500;
+} 
