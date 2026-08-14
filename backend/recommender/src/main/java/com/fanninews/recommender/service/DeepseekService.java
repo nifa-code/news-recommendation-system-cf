@@ -19,17 +19,6 @@ import java.util.concurrent.TimeUnit;
 @Service
 @Slf4j
 public class DeepseekService {
-//    @Value("${deepseek.api.base-url}")
-//    private String apiBaseUrl;
-//
-//    @Value("${deepseek.api.key:#{null}}")
-//    private String apiKey;
-//
-//    @Value("${deepseek.api.model}")
-//    private String model;
-//
-//    @Value("${deepseek.api.timeout:30000}")
-//    private int timeout;
     private final DeepseekConfig deepseekConfig;
     private OkHttpClient client;
     private ObjectMapper objectMapper;
