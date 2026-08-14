@@ -33,15 +33,9 @@ public class HotNewsUpdater {
     @Transactional
     public void updateHotNews() {
         log.info("开始更新热门新闻...");
-
-        // 获取过去24小时的行为数据
         LocalDateTime sinceTime = LocalDateTime.now().minusHours(24);
-
-        // 查询热门新闻（按热度排序）
         Pageable top100 = PageRequest.of(0, 100);
         List<Object[]> hotNewsResults = userBehaviorRepository.findNewsBehaviorStats(sinceTime);
-
-        // 计算每个新闻的总热度
         Map<String, Double> newsHeatMap = new HashMap<>();
         for (Object[] result : hotNewsResults) {
             String newsId = (String) result[0];
@@ -51,13 +45,11 @@ public class HotNewsUpdater {
             double weight = getBehaviorWeight(behaviorType);
             newsHeatMap.put(newsId, newsHeatMap.getOrDefault(newsId, 0.0) + count * weight);
         }
-
-        // 更新新闻的hot标记
         List<News> allNews = newsRepository.findAll();
         for (News news : allNews) {
             double heatScore = newsHeatMap.getOrDefault(news.getNewsId(), 0.0);
             news.setHeatScore(heatScore);
-            news.setIsHot(heatScore > 5.0);  // 阈值可以根据实际情况调整
+            news.setIsHot(heatScore > 5.0); 
 
             newsRepository.save(news);
         }
