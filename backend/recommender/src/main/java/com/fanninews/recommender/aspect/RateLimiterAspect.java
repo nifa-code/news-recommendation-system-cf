@@ -42,11 +42,9 @@ public class RateLimiterAspect {
     private final ParameterNameDiscoverer parameterNameDiscoverer = new DefaultParameterNameDiscoverer();
     @Before("@annotation(rateLimiter)")
     public void doBefore(JoinPoint point, RateLimiter rateLimiter) throws Throwable {
-        // 1. 组装限流的Redis Key (结合前缀、IP、类名、方法名)
+
         String combineKey = getCombineKey(rateLimiter, point);
-        // 2. 设置Lua脚本的KEYS和ARGV参数
         List<String> keys = Collections.singletonList(combineKey);
-        // 3. 执行Lua脚本
         Long result = StringRedisTemplate.execute(limitScript, keys, String.valueOf(rateLimiter.count()), String.valueOf(rateLimiter.time()));
         if (result == null) {
             log.error("限流脚本执行返回null，降级处理");
