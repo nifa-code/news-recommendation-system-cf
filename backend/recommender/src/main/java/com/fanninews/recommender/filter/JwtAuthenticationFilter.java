@@ -25,14 +25,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final JwtUtil jwtUtil;
     private final CustomUserDetailsService userDetailsService;
 
-    // 构造注入
+
     public JwtAuthenticationFilter(JwtUtil jwtUtil, CustomUserDetailsService userDetailsService) {
         this.jwtUtil = jwtUtil;
         this.userDetailsService = userDetailsService;
     }
 
-    // 重点：保持protected修饰符，正确重写父类方法
-    @Override // 必须加@Override注解，确保重写父类方法
+    @Override 
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
@@ -44,14 +43,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 if (jwtUtil.enhancedValidateToken(token, userId)
                         && SecurityContextHolder.getContext().getAuthentication() == null) {
 
-                    // 加载UserDetails，确保principal是UserDetails类型
                     UserDetails userDetails = userDetailsService.loadUserByUsername(userId);
 
-                    // 构建正确的认证对象
                     UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-                            userDetails,  // 核心：UserDetails而非String
+                            userDetails,
                             null,
-                            userDetails.getAuthorities() // 权限列表（无则传空列表）
+                            userDetails.getAuthorities() // 权限列表
                     );
                     authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
