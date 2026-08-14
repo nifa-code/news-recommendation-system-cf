@@ -13,12 +13,6 @@ public class UserBehavior {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // 自增主键
     private Long id;
 
-    // 多对一关系：多个行为属于一个用户
-
-//    @JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false)
-//    @JsonIgnore  // 可选：防止JSON序列化时无限循环
-//    private User user;
-
     @Column(name = "user_id", nullable = false, length = 50)
     private String userId;
 
