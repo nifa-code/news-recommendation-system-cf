@@ -1,0 +1,98 @@
+# 服务器配置（根节点）
+server:
+  port: 8080
+  error:
+    include-message: always
+    include-binding-errors: always
+    include-stacktrace: never
+
+# Spring 核心配置（根节点，唯一的 spring 节点）
+spring:
+  application:
+    name: recommender
+  # 数据库配置
+  datasource:
+    url: jdbc:mysql://localhost:3306/news_recommender?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: 123456
+  # JPA 配置
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  # 缓存配置
+  cache:
+    type: none
+  # RabbitMQ 配置
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+  # 邮件配置（核心：归到 spring 根节点下，无嵌套）
+  mail:
+    host: smtp.qq.com
+    port: 587
+    username: 2116602182@qq.com
+    password: ""
+    protocol: smtp
+    default-encoding: UTF-8
+    properties:
+      mail:
+        smtp:
+          debug: true
+          auth: true
+          starttls:
+            enable: true
+            required: true
+        debug: true
+  # Redis 配置（核心：归到 spring 根节点下，无嵌套）
+  data:
+    redis:
+      standalone:
+        host: localhost
+        port: 6379
+      lettuce:
+        pool:
+          max-active: 8
+          max-wait: -1ms
+          max-idle: 8
+          min-idle: 0
+
+# JWT 配置（根节点）
+jwt:
+  secret: news-recommender-secret-key-should-be-at-least-32-chars
+  expiration: 86400000
+
+# Python API 配置（根节点）
+python:
+  api:
+    url: http://localhost:8000
+    timeout: 5000
+    retry-times: 3
+
+# DeepSeek 配置（根节点，关键：和 sprin g 同级）
+deepseek:
+  api:
+    key: ${DEEPSEEK_API_KEY:}
+    base-url: https://api.deepseek.com/
+    model: deepseek-chat
+    timeout: 30000
+
+# 应用自定义配置（根节点）
+app:
+  frontend:
+    url: http://localhost:3000
+  email:
+    from-name: "基于协同过滤算法的新闻推荐系统"
+    reset-password:
+      expire-hours: 2
+
+# 日志配置（根节点）
+logging:
+  level:
+    org.springframework: DEBUG
+    org.springframework.web: DEBUG
+    org.springframework.validation: DEBUG
+    com.fanninews: DEBUG
+    com.fanninews.recommender: DEBUG

@@ -1,0 +1,10 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景圆 -->
+  <circle cx="32" cy="32" r="28" fill="#2B6EB0" />
+  <!-- 字母 N（由两条竖线和一条斜线构成） -->
+  <line x1="20" y1="18" x2="20" y2="46" stroke="white" stroke-width="4" stroke-linecap="round" />
+  <line x1="44" y1="18" x2="44" y2="46" stroke="white" stroke-width="4" stroke-linecap="round" />
+  <line x1="20" y1="18" x2="44" y2="46" stroke="white" stroke-width="4" stroke-linecap="round" />
+  <!-- 星星（象征推荐） -->
+  <path d="M48 20 L50.5 25.5 L56 26.5 L52 30.5 L53 36 L48 33 L43 36 L44 30.5 L40 26.5 L45.5 25.5 L48 20Z" fill="#FFD966" />
+</svg>

@@ -1,0 +1,10 @@
+target/
+*.class
+*.jar
+*.war
+*.iml
+.idea/
+*.log
+.DS_Store
+node_modules/
+.env

@@ -1,0 +1,103 @@
+/* NewsInteraction.css */
+.news-interaction {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.interaction-stats {
+  display: flex;
+  justify-content: space-around;
+  gap: 16px;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.stat-icon {
+  font-size: 20px;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: #666;
+}
+
+.stat-value {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+}
+
+.interaction-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+
+.interaction-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
+}
+
+.interaction-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.interaction-btn.active {
+  border-color: #3f51b5;
+  background-color: rgba(63, 81, 181, 0.1);
+}
+
+.interaction-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.like-btn.active .btn-icon {
+  color: #e91e63;
+}
+
+.collect-btn.active .btn-icon {
+  color: #ff9800;
+}
+
+.btn-icon {
+  font-size: 18px;
+}
+
+.btn-text {
+  font-weight: 500;
+}
+
+
+/* Font Awesome 图标样式 */
+.icon {
+  font-size: 18px; /* 图标大小 */
+  color: #e2e8f0; /* 深色主题默认颜色 */
+  margin-right: 6px; /* 图标和文字的间距 */
+  transition: color 0.2s;
+}
+
+/* 选中/hover 样式 */
+.like-stat.active .icon,
+.collect-stat.active .icon,
+.like-stat:hover .icon,
+.collect-stat:hover .icon {
+  color: #4299e1; /* 选中时变为主题蓝色 */
+}
