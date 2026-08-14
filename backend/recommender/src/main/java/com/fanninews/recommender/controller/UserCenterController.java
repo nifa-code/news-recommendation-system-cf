@@ -45,12 +45,8 @@ public class UserCenterController {
                         .body(ApiResponse.error("用户未登录"));
             }
             String userId = userDetails.getUsername();
-
-            // 获取浏览历史列表和总数
             List<Map<String, Object>> historyList = userBehaviorService.getUserViewHistory(userId, pageNum, pageSize);
             long total = userBehaviorService.getUserViewHistoryCount(userId);
-
-            // 组装返回结果
             Map<String, Object> result = new HashMap<>();
             result.put("list", historyList);
             result.put("total", total);
@@ -111,12 +107,9 @@ public class UserCenterController {
                         .body(ApiResponse.error("用户未登录"));
             }
             String userId = userDetails.getUsername();
-
-            // 获取收藏列表和总数
             List<Map<String, Object>> collectList = userBehaviorService.getUserCollectList(userId, pageNum, pageSize);
             long total = userBehaviorService.getUserCollectListCount(userId);
 
-            // 组装返回结果
             Map<String, Object> result = new HashMap<>();
             result.put("list", collectList);
             result.put("total", total);
@@ -171,8 +164,6 @@ public class UserCenterController {
                         .body(ApiResponse.error("用户未登录"));
             }
             String userId = userDetails.getUsername();
-
-            // 调用已有的取消收藏方法
             boolean isCanceled = !userBehaviorService.toggleCollect(userId, newsId);
             if (isCanceled) {
                 return ResponseEntity.ok(ApiResponse.success("取消收藏成功"));
@@ -196,8 +187,6 @@ public class UserCenterController {
                         .body(ApiResponse.error("用户未登录"));
             }
             String userId = userDetails.getUsername();
-
-            // 调用已有的取消收藏方法
             boolean isCanceled = !userBehaviorService.toggleLike(userId, newsId);
             if (isCanceled) {
                 return ResponseEntity.ok(ApiResponse.success("取消点赞成功"));

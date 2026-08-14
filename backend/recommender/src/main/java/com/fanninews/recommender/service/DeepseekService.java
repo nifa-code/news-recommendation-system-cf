@@ -19,17 +19,6 @@ import java.util.concurrent.TimeUnit;
 @Service
 @Slf4j
 public class DeepseekService {
-//    @Value("${deepseek.api.base-url}")
-//    private String apiBaseUrl;
-//
-//    @Value("${deepseek.api.key:#{null}}")
-//    private String apiKey;
-//
-//    @Value("${deepseek.api.model}")
-//    private String model;
-//
-//    @Value("${deepseek.api.timeout:30000}")
-//    private int timeout;
     private final DeepseekConfig deepseekConfig;
     private OkHttpClient client;
     private ObjectMapper objectMapper;
@@ -87,29 +76,6 @@ public class DeepseekService {
         }
     }
 
-
-//    @PostConstruct
-//    public void init(){
-//        log.info("API Key: {}", apiKey != null ? "已设置" : "未设置");
-//        log.info("API Base URL: {}", apiBaseUrl);
-//        log.info("Model: {}", model);
-//        if(apiKey==null||apiKey.trim().isEmpty()){
-//            log.error("DeepSeek API Key 未配置！请在环境变量或配置文件中设置 DEEPSEEK_API_KEY。");
-//        }
-//        this.objectMapper = new ObjectMapper();
-//        this.objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);//忽略JSON里多余/未定义的字段
-//        this.chatEndpoint = apiBaseUrl + "/chat/completions";
-//
-//        //初始化Http客户端
-//        this.client=new OkHttpClient.Builder()
-//                .connectTimeout(timeout, TimeUnit.MILLISECONDS)
-//                .writeTimeout(timeout, TimeUnit.MILLISECONDS)
-//                .readTimeout(timeout, TimeUnit.MILLISECONDS)
-//                .build();
-//
-//        log.info("DeepSeekService 初始化完成，模型: {}, 端点: {}", model, chatEndpoint);
-//
-//    }
     public String generateAnswer(String prompt) throws IOException {
         List<DeepSeekRequest.Message> messages= List.of(new  DeepSeekRequest.Message("user",prompt) );
 

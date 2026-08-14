@@ -127,13 +127,12 @@ public class DebugController {
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.debug", "true");
-        // 认证器（用你的邮箱+授权码）
         Authenticator auth = new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(
-                        "2116602182@qq.com",  // 和spring.mail.username一致
-                        "raeifkmxxwivecec"     // 刚生成的授权码
+                        "9999992182@qq.com",  // 和spring.mail.username一致
+                        "raeifkmxxwivecec"     // 授权码
                 );
             }
         };
@@ -143,7 +142,7 @@ public class DebugController {
             message.setFrom(new InternetAddress("2788850080@qq.com"));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress("2788850080@qq.com"));
             message.setSubject("原生测试邮件");
-            message.setText("这是原生JavaMail测试邮件");
+            message.setText("原生JavaMail测试邮件");
 
             Transport.send(message);
             return ResponseEntity.ok("原生测试邮件已发送");

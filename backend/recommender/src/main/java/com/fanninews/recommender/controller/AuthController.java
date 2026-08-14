@@ -35,12 +35,6 @@ public class AuthController {
 
     @Autowired
     private UserRepository userRepository;
-//    @RateLimiter(
-//            key = "auth:register",
-//            time = 3600,  // 1小时内
-//            count = 5,    // 最多注册5次
-//            limitType = LimitType.IP  // 基于IP限流
-//    )
     @PostMapping("/register")
     public ResponseEntity<?> register(@Valid @RequestBody RegisterRequest request){
             try{
@@ -71,36 +65,7 @@ public class AuthController {
             }
     }
 
-//    @RateLimiter(
-//            key = "auth:profile",
-//            time = 60,
-//            count = 30,
-//            limitType = LimitType.USER  // 基于用户限流，获取个人信息
-//    )
-//    @GetMapping("/me")
-//    @Operation(summary = "获取当前用户信息")
-//    public ResponseEntity<?> getCurrentUser() {
-//        try {
-//            String userId=(String)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//            User user = userService.findUserById(userId);
-//            return ResponseEntity.ok(Map.of(
-//                    "userId", user.getUserId(),
-//                    "userName", user.getUsername(),
-//                    "email", user.getEmail(),
-//                    "createdAt", user.getCreatedAt(),
-//                    "lastLogin", user.getLastLogin(),
-//                    "timestamp", System.currentTimeMillis()
-//            ));
-//
-//        }catch (RuntimeException e) {
-//            log.error("获取当前用户信息失败: {}", e.getMessage());
-//            return ResponseEntity.status(401).body("未授权: " + e.getMessage());
-//        } catch (Exception e) {
-//            log.error("获取当前用户信息异常: {}", e.getMessage(), e);
-//            return ResponseEntity.status(500).body("服务器内部错误");
-//        }
-//
-//    }
+
 @GetMapping("/me")
 @Operation(summary = "获取当前用户信息")
 public ResponseEntity<?> getCurrentUser() {
@@ -169,22 +134,17 @@ public ResponseEntity<?> getCurrentUser() {
     private String getCurrentUserId() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        // 1. 确保认证信息存在
         if (authentication == null) {
             throw new AccessDeniedException("认证信息缺失，请重新登录");
         }
-
-        // 2. 确保用户已认证（不是匿名用户）
         if (!authentication.isAuthenticated() || authentication instanceof AnonymousAuthenticationToken) {
             throw new AccessDeniedException("用户未认证，请先登录");
         }
 
-        // 3. 安全地提取用户名
         Object principal = authentication.getPrincipal();
         if (principal instanceof org.springframework.security.core.userdetails.UserDetails) {
             return ((UserDetails) principal).getUsername();
         } else if (principal instanceof String) {
-            // 确保这个String不是匿名标识
             if ("anonymousUser".equals(principal)) {
                 throw new AccessDeniedException("无效的用户身份");
             }
